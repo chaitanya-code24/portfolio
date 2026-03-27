@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b1020;
+  --surface: #f7f0e8;
+  --surface-strong: #0f172b;
+  --card: rgba(15, 23, 43, 0.72);
+  --text-primary: #f7f0e8;
+  --text-secondary: #d0d8e7;
+  --text-muted: #94a3b8;
+  --text-soft: #9fb2c8;
+  --accent: #ff7a18;
+  --accent-2: #6ee7d8;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 122, 24, 0.22), transparent 24%),
+    radial-gradient(circle at top right, rgba(110, 231, 216, 0.16), transparent 26%),
+    linear-gradient(180deg, #08101e 0%, #0b1020 40%, #121a2f 100%);
+  color: var(--text-primary);
+  font-family: var(--font-body), sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(255, 122, 24, 0.28);
+  color: var(--surface);
+}
+
+.grain {
+  position: relative;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, black, transparent);
+}
+
+.section-shell {
+  margin: 0 auto;
+  width: min(1120px, calc(100% - 2rem));
+}
+
+.eyebrow {
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.headline {
+  font-family: var(--font-display), sans-serif;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.glass-panel {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(247, 240, 232, 0.04);
+  backdrop-filter: blur(18px);
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: float-in 700ms ease-out both;
 }
